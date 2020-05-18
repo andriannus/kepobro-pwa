@@ -41,7 +41,7 @@ const methods = {
                 ${article.title}
               </span>
 
-              <p>${article.description}</p>
+              <p>${snarkdown(article.description)}</p>
             </div>
           </div>
         `;
