@@ -1,3 +1,7 @@
+const API = {
+  baseUrl: "https://readerapi.codepolitan.com/articles",
+};
+
 const ROUTES = [
   {
     path: "home",
@@ -18,6 +22,35 @@ const ROUTES = [
 ];
 
 const methods = {
+  fetchArticles: async () => {
+    try {
+      let articleHtml = "";
+
+      const articleElement = document.querySelector(".Article");
+      const { result: articles } = await api.get(API.baseUrl);
+
+      articles.forEach((article) => {
+        articleHtml += `
+          <div class="card grey lighten-4 z-depth-0">
+            <div class="card-image">
+              <img src="${article.thumbnail}" alt="${article.title}">
+            </div>
+          
+            <div class="card-content">
+              <span class="card-title truncate">
+                ${article.title}
+              </span>
+
+              <p>${article.description}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      articleElement.innerHTML = articleHtml;
+    } catch (error) {}
+  },
+
   getSelectedRoute: (path) => {
     return ROUTES.find((route) => {
       return route.path === path || route.path === "404";
@@ -62,6 +95,9 @@ const methods = {
       switch (this.status) {
         case 200: {
           content.innerHTML = xhttp.responseText;
+
+          if (page === "home") methods.fetchArticles();
+
           break;
         }
 

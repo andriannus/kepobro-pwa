@@ -1,6 +1,6 @@
 const ICON_SIZES = ["72", "96", "128", "144", "152", "192", "384", "512"];
 const IMAGES = ["404.png", "logo.png", "photo.jpg"];
-const SCRIPTS = ["index", "materialize.min"];
+const SCRIPTS = ["api", "index", "materialize.min"];
 const STYLES = ["index", "materialize.min"];
 
 const getAssetFiles = (fileType) => {
