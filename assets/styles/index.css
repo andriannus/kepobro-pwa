@@ -1,0 +1,64 @@
+nav {
+  background-color: #363636;
+  height: 56px !important;
+  line-height: 56px !important;
+}
+
+nav .nav-wrapper a.sidenav-trigger {
+  height: 56px !important;
+  line-height: 56px !important;
+  display: block;
+}
+
+nav .nav-wrapper {
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+nav .nav-wrapper a.brand-logo {
+  max-height: 100%;
+  padding: 7px;
+}
+
+nav .nav-wrapper a.brand-logo img {
+  max-height: 42px;
+}
+
+.AppBar--fixed {
+  position: fixed;
+  top: 0;
+  z-index: 900;
+}
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  margin: 56px auto 0 auto;
+  max-width: 480px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.u-isMarginless {
+  margin: 0 !important;
+}
+
+.u-isFlat {
+  border-radius: 0;
+}
+
+.u-padding--base {
+  padding: 10px;
+}
+
+.u-isShadowless {
+  box-shadow: none;
+}
+
+.u-marginTop--small {
+  margin-top: 5px;
+}
+
+.u-marginTop--base {
+  margin-top: 10px;
+}
