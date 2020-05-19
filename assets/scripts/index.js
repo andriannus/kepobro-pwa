@@ -22,32 +22,46 @@ const ROUTES = [
 ];
 
 const methods = {
-  fetchArticles: async () => {
-    try {
-      let articleHtml = "";
+  renderArticle: (articles) => {
+    const articleElement = document.querySelector(".Article");
 
-      const articleElement = document.querySelector(".Article");
+    let articleHtml = "";
+
+    articles.forEach((article) => {
+      articleHtml += `
+        <div class="card grey lighten-4 z-depth-0">
+          <div class="card-image">
+            <img src="${article.thumbnail}" alt="${article.title}">
+          </div>
+        
+          <div class="card-content">
+            <span class="card-title truncate">
+              ${article.title}
+            </span>
+
+            <p>${snarkdown(article.description)}</p>
+          </div>
+        </div>
+      `;
+    });
+
+    articleElement.innerHTML = articleHtml;
+  },
+
+  fetchArticles: async () => {
+    const cachedResponse = await caches.match(API.baseUrl);
+
+    if (cachedResponse) {
+      const { result: articles } = await cachedResponse.json();
+
+      methods.renderArticle(articles);
+      return;
+    }
+
+    try {
       const { result: articles } = await api.get(API.baseUrl);
 
-      articles.forEach((article) => {
-        articleHtml += `
-          <div class="card grey lighten-4 z-depth-0">
-            <div class="card-image">
-              <img src="${article.thumbnail}" alt="${article.title}">
-            </div>
-          
-            <div class="card-content">
-              <span class="card-title truncate">
-                ${article.title}
-              </span>
-
-              <p>${snarkdown(article.description)}</p>
-            </div>
-          </div>
-        `;
-      });
-
-      articleElement.innerHTML = articleHtml;
+      methods.renderArticle(articles);
     } catch (error) {}
   },
 
